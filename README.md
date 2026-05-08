@@ -17,26 +17,46 @@ This repository contains a full-stack demo application combining:
 ```mermaid
 flowchart TD
   subgraph Frontend
-    F[React + Vite SPA] -->|POST /login| A[FastAPI API]
-    F -->|POST /ask| A
+    UI[React + Vite SPA]
+    UI -->|POST /login| API[FastAPI API]
+    UI -->|POST /ask| API
+    UI -->|Query request| API
   end
 
-  subgraph Backend
-    A -->|Login request| B["JWT Auth (app/auth.py)"]
-    A -->|Query request| C["RAG Service (app/rag.py)"]
-    C --> D[Chroma Vector Store]
-    C --> E["LLM Engine (ollama phi3:mini)"]
-    C --> F2[Role-based Filter]
+  subgraph Backend[Backend (FastAPI)]
+    subgraph Auth[Auth (Internal)]
+      AuthJWT["JWT Auth (app/auth.py)"]
+    end
+
+    subgraph RAG[RAG Pipeline (Internal)]
+      RAGSvc["RAG Service (app/rag.py)"]
+      RoleFilter["Role-based Filter"]
+      Chroma["Chroma Vector Store"]
+      LLM["LLM Engine (ollama phi3:mini)"]
+    end
+
+    API -->|Login request| AuthJWT
+    API -->|Query request| RAGSvc
+    RAGSvc -->|filters by role| RoleFilter
+    RoleFilter --> Chroma
+    Chroma -->|retrieves docs| RAGSvc
+    RAGSvc -->|answers| LLM
+    LLM --> API
+    AuthJWT -->|returns token| API
   end
 
-  subgraph Data
-    D -->|vectors from| G[documents/*]
+  subgraph Offline[Offline Ingestion (Not in request path)]
+    Ingest["ingest.py"]
+    DocsDisk["documents/* (on disk)"]
+    Ingest -->|loads| DocsDisk
   end
 
-  B -->|returns token| A
-  D -->|retrieves docs| C
-  F2 -->|filters by role| D
-  E -->|answers| F
+  subgraph Data[Data (Persistent)]
+    DocsPersist["documents/*"]
+  end
+
+  DocsDisk -.->|populates| DocsPersist
+  DocsPersist -->|vectors from| Chroma
 ```
 
 ## Features
