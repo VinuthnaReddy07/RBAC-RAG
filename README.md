@@ -24,10 +24,10 @@ flowchart TD
   end
 
   subgraph Backend
-    A -->|Login request| B[JWT Auth (app/auth.py)]
-    A -->|Query request| C[RAG Service (app/rag.py)]
+    A -->|Login request| B["JWT Auth (app/auth.py)"]
+    A -->|Query request| C["RAG Service (app/rag.py)"]
     C --> D[Chroma Vector Store]
-    C --> E[LLM Engine (ollama phi3:mini)]
+    C --> E["LLM Engine (ollama phi3:mini)"]
     C --> F2[Role-based Filter]
   end
 
