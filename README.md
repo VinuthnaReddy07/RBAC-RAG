@@ -14,8 +14,6 @@ This repository contains a full-stack demo application combining:
 
 ## System Architecture
 
-Below is the corrected architecture diagram for your exact project implementation:
-
 ```mermaid
 flowchart TD
   subgraph Frontend
