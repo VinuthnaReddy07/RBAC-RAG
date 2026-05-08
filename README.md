@@ -14,50 +14,7 @@ This repository contains a full-stack demo application combining:
 
 ## System Architecture
 
-```mermaid
-flowchart TD
-  subgraph Frontend
-    UI[React + Vite SPA]
-    UI -->|POST /login| API[FastAPI API]
-    UI -->|POST /ask| API
-    UI -->|Query request| API
-  end
-
-  subgraph Backend[Backend (FastAPI)]
-    subgraph Auth[Auth (Internal)]
-      AuthJWT["JWT Auth (app/auth.py)"]
-    end
-
-    subgraph RAG[RAG Pipeline (Internal)]
-      RAGSvc["RAG Service (app/rag.py)"]
-      RoleFilter["Role-based Filter"]
-      Chroma["Chroma Vector Store"]
-      LLM["LLM Engine (ollama phi3:mini)"]
-    end
-
-    API -->|Login request| AuthJWT
-    API -->|Query request| RAGSvc
-    RAGSvc -->|filters by role| RoleFilter
-    RoleFilter --> Chroma
-    Chroma -->|retrieves docs| RAGSvc
-    RAGSvc -->|answers| LLM
-    LLM --> API
-    AuthJWT -->|returns token| API
-  end
-
-  subgraph Offline[Offline Ingestion (Not in request path)]
-    Ingest["ingest.py"]
-    DocsDisk["documents/* (on disk)"]
-    Ingest -->|loads| DocsDisk
-  end
-
-  subgraph Data[Data (Persistent)]
-    DocsPersist["documents/*"]
-  end
-
-  DocsDisk -.->|populates| DocsPersist
-  DocsPersist -->|vectors from| Chroma
-```
+![Architecture](image.png)
 
 ## Features
 
