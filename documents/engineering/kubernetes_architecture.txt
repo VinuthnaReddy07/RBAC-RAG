@@ -1,0 +1,31 @@
+ENGINEERING DOCUMENT – KUBERNETES ARCHITECTURE
+
+Infrastructure Overview:
+
+* Production workloads run on Kubernetes clusters in AWS EKS.
+* Services are deployed using Helm charts.
+
+Core Components:
+
+* API Gateway
+* Authentication Service
+* Vector Search Service
+* LLM Orchestration Layer
+
+Monitoring Stack:
+
+* Prometheus
+* Grafana
+* ELK Stack
+
+Security:
+
+* RBAC enabled at cluster level.
+* Secrets managed using AWS Secrets Manager.
+
+Scaling:
+
+* Horizontal Pod Autoscaler configured for AI inference services.
+
+Access Classification:
+Engineering

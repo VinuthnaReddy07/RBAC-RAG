@@ -1,0 +1,28 @@
+CI/CD DEPLOYMENT PIPELINE
+
+Pipeline Stages:
+
+1. Source Code Commit
+2. Automated Testing
+3. Docker Build
+4. Vulnerability Scanning
+5. Kubernetes Deployment
+
+Tools Used:
+
+* GitHub Actions
+* Docker
+* Kubernetes
+* Terraform
+
+Deployment Strategy:
+
+* Blue-Green Deployment
+* Canary Releases for AI Services
+
+Infrastructure as Code:
+
+* Managed using Terraform modules.
+
+Access Classification:
+Engineering

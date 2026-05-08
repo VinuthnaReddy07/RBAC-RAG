@@ -1,0 +1,29 @@
+SECURITY INCIDENT RESPONSE GUIDE
+
+Incident Severity Levels:
+
+* SEV-1: Production outage
+* SEV-2: Major degradation
+* SEV-3: Minor issue
+
+Response Procedure:
+
+1. Detect incident
+2. Create incident ticket
+3. Notify on-call engineer
+4. Mitigate issue
+5. Conduct postmortem
+
+Security Incidents:
+
+* Unauthorized access attempts
+* Data leakage
+* Credential compromise
+
+Recovery Targets:
+
+* RTO: 30 minutes
+* RPO: 15 minutes
+
+Access Classification:
+Engineering

@@ -1,0 +1,29 @@
+RECRUITMENT GUIDELINES – INTERNAL
+
+Hiring Process:
+
+1. Resume Screening
+2. Technical Interview
+3. Managerial Round
+4. HR Discussion
+5. Background Verification
+
+Preferred Skills for AI Hiring:
+
+* Python
+* LangChain
+* Kubernetes
+* AWS
+* Vector Databases
+
+Hiring Priorities for 2026:
+
+* AI Platform Engineers
+* Security Analysts
+* Cloud Infrastructure Engineers
+
+Confidential Notes:
+Compensation bands must not be disclosed externally.
+
+Access Classification:
+HR
