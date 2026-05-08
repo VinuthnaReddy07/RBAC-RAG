@@ -14,29 +14,31 @@ This repository contains a full-stack demo application combining:
 
 ## System Architecture
 
-Below is the architecture diagram for the core data flow and component interactions:
+Below is the corrected architecture diagram for your exact project implementation:
 
 ```mermaid
 flowchart TD
   subgraph Frontend
-    F[React + Vite SPA] -->|Login request| A[FastAPI API]
-    F -->|Ask query| A
+    F[React + Vite SPA] -->|POST /login| A[FastAPI API]
+    F -->|POST /ask| A
   end
 
   subgraph Backend
-    A -->|POST /login| B[Auth Layer]
-    A -->|POST /ask| C[RAG Service]
+    A -->|Login request| B[JWT Auth (app/auth.py)]
+    A -->|Query request| C[RAG Service (app/rag.py)]
     C --> D[Chroma Vector Store]
-    C --> E[Document Retrieval + OpenAI / LLM]
+    C --> E[LLM Engine (ollama phi3:mini)]
+    C --> F2[Role-based Filter]
   end
 
   subgraph Data
-    D -->|retrieves embeddings| G[documents/*]
+    D -->|vectors from| G[documents/*]
   end
 
-  B --> H[JWT Token]
-  H -->|secures| A
-  E -->|context-aware answers| F
+  B -->|returns token| A
+  D -->|retrieves docs| C
+  F2 -->|filters by role| D
+  E -->|answers| F
 ```
 
 ## Features
