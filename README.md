@@ -14,7 +14,7 @@ This repository contains a full-stack demo application combining:
 
 ## System Architecture
 
-![Architecture](image.png)
+![Architecture Diagram](./image.png)
 
 ## Features
 
